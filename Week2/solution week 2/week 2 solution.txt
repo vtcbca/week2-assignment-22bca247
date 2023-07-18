@@ -1,0 +1,71 @@
+sqlite> .open student.db
+
+--->1. Create table 
+
+ CREATE TABLE stude (
+     id INTEGER PRIMARY KEY,
+     name TEXT
+);
+
+
+ CREATE TABLE stud_details (
+     id INTEGER,
+     city TEXT,
+     mobileno TEXT,
+     FOREIGN KEY (id) REFERENCES stud(id)
+ );
+
+
+--->2. Insert minimum 10 records for each table.
+
+insert into stude values(1,'ruhi');
+insert into stude values(2,'sai');
+insert into stude values(3,'ram');
+insert into stude values(4,'raj');
+insert into stude values(5,'hamja');
+insert into stude values(6,'ragul');
+insert into stude values(7,'vikram');
+insert into stude values(8,'mit');
+insert into stude values(9,'kalu');
+insert into stude values(10,'arjun');
+
+insert into stud_details values(1,'bardoli',9874563688);
+insert into stud_details values(2,'surat',8874854436);
+insert into stud_details values(3,'mandvi',7878451299);
+insert into stud_details values(4,'delad',9988547524);
+insert into stud_details values(5,'valod',8745854190);
+insert into stud_details values(6,'madhi',8745252078);
+insert into stud_details values(7,'mandvi',8745210278);
+insert into stud_details values(8,'buhari',7412369890);
+insert into stud_details values(9,'vyara',7485210267);
+insert into stud_details values(10,'baben',7458963248);
+
+
+--->3. Display whose student come from the Surat City.
+
+sqlite> select stude.id,name ,city, mobileno from stud_details inner join stude on stude.id=stud_details.id and city ='surat';
+
+-->output:
+
+2|sai|surat|8874854436
+
+-->>4. Display student details whose city name start with 'B'.
+
+sqlite> select stude.id,name ,city, mobileno from stud_details inner join stude on stude.id=stud_details.id and city like 'b%';
+
+->output:
+
+1|ruhi|bardoli|9874563688
+8|mitu|buhari|7412369890
+10|arjun|baben|7458963248
+
+
+---->5. Update mobileno who are comming from 'Surat'
+
+sqlite> update stud_details set mobileno=9998874520 where city='surat' and id=2
+   ...> ;
+
+
+
+
+
